@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Account</title>
+    
+</head>
+ <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h2{
+    color: white;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #555;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: transparent;
+    backdrop-filter: blur(40px);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-container h2 {
+    color: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+.login-container label {
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    color: #ece5e5;
+    margin-bottom: 5px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #273127;
+    color: #ffffff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #373b37;
+}
+.content {
+    margin-left: 0;
+    padding: 10px;
+    transition: margin-left 0.3s;
+    background-color: rgb(27, 25, 25);
+  }
+  
+  .content h1 {
+    font-size: 24px;
+  }
+  .head {
+  position: fixed; 
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  background-color: #0e0f0e; 
+  color: #fff; 
+  padding: 50px; 
+  font-size: 24px; 
+  text-align: center; 
+  font-family: Arial, sans-serif; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  border-bottom: 3px solid #111411; 
+  z-index: 1000; 
+}
+
+ </style>
+ <header class="head">Create your account</header>
+<body>
+    <div class="login-container">
+        <h2>Create New Account</h2>
+        <form id="createAccountForm" onsubmit="return createAccount(event)">
+            <label for="newUsername">Username:</label>
+            <input type="text" id="newUsername" required>
+
+            <label for="newPassword">Password:</label>
+            <input type="password" id="newPassword" required>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" required>
+
+            <button type="submit">Create Account</button>
+        </form>
+    </div>
+
+    <script>
+        function createAccount(event) {
+            event.preventDefault();
+
+            const username = document.getElementById("newUsername").value;
+            const password = document.getElementById("newPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return false;
+            }
+
+            
+            const existingAccount = localStorage.getItem(username);
+            if (existingAccount) {
+                alert("Username already exists. Please choose a different username.");
+                return false;
+            }
+
+            
+            localStorage.setItem(username, JSON.stringify({ username, password }));
+
+            
+            sessionStorage.setItem("loggedInUser", username);
+            
+            alert("Account created successfully! You are now logged in.");
+            window.location.href = "index1.html"; 
+        }
+    </script>
+</body>
+</html>
